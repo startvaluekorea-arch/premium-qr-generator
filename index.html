@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium QR Code Generator</title>
+  <meta name="description" content="Nayuki QR Code Generator를 탑재한 프리미엄 SVG QR 코드 생성기입니다. 실시간 스타일링, 다양한 커스텀 도형, 그리고 간편한 SVG/PNG 다운로드를 지원합니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="dark-theme">
+  <div class="background-decorations">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <main class="app-container">
+    <header class="app-header">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="10" height="10" rx="2.5" stroke="url(#logo-grad)" stroke-width="2.5"/>
+          <rect x="5" y="5" width="4" height="4" rx="1" fill="url(#logo-grad)"/>
+          <rect x="20" y="2" width="10" height="10" rx="2.5" stroke="url(#logo-grad)" stroke-width="2.5"/>
+          <rect x="23" y="5" width="4" height="4" rx="1" fill="url(#logo-grad)"/>
+          <rect x="2" y="20" width="10" height="10" rx="2.5" stroke="url(#logo-grad)" stroke-width="2.5"/>
+          <rect x="5" y="23" width="4" height="4" rx="1" fill="url(#logo-grad)"/>
+          <path d="M20 20h3v3h-3zm5 0h3v3h-3zm-5 5h3v3h-3zm5 5h3v-3h-3zm0 0h3v3h-3zm3-5h2v2h-2zm-3-3h3v3h-3z" fill="url(#logo-grad)"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8B5CF6"/>
+              <stop offset="1" stop-color="#EC4899"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">QR <span class="gradient-text">Studio</span></span>
+      </div>
+      <div class="theme-switch-wrapper">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="테마 전환">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6. 6. 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="grid-layout">
+      <!-- Input Panel -->
+      <section class="panel glass-card input-panel">
+        <h2 class="panel-title">QR 코드 커스텀</h2>
+        
+        <!-- Content Input -->
+        <div class="control-group">
+          <label for="qr-text" class="control-label">콘텐츠 (텍스트 또는 URL)</label>
+          <div class="input-wrapper">
+            <textarea id="qr-text" class="form-input" placeholder="QR 코드로 변환할 텍스트나 URL을 입력하세요..." rows="3">https://github.com/nayuki/QR-Code-generator</textarea>
+            <div class="char-counter"><span id="char-count">0</span>자</div>
+          </div>
+        </div>
+
+        <!-- Design Options Grid -->
+        <div class="options-grid">
+          <!-- Module Style -->
+          <div class="control-group">
+            <label for="module-style" class="control-label">모듈 디자인</label>
+            <select id="module-style" class="form-select">
+              <option value="square" selected>클래식 사각형</option>
+              <option value="circle">모던 원형</option>
+              <option value="rounded">둥근 사각형</option>
+            </select>
+          </div>
+
+          <!-- ECC Level -->
+          <div class="control-group">
+            <label for="ecc-level" class="control-label">오류 정정 (ECC)</label>
+            <select id="ecc-level" class="form-select">
+              <option value="LOW">LOW (7% 복구)</option>
+              <option value="MEDIUM" selected>MEDIUM (15% 복구)</option>
+              <option value="QUARTILE">QUARTILE (25% 복구)</option>
+              <option value="HIGH">HIGH (30% 복구)</option>
+            </select>
+          </div>
+
+          <!-- Quiet Zone -->
+          <div class="control-group">
+            <label for="border-size" class="control-label">테두리 여백 (Quiet Zone)</label>
+            <div class="range-wrapper">
+              <input type="range" id="border-size" min="0" max="10" value="4" class="form-range">
+              <span id="border-value" class="range-val">4</span>
+            </div>
+          </div>
+
+          <!-- Color Customization -->
+          <div class="control-group color-group">
+            <label class="control-label">색상 모드</label>
+            <div class="color-mode-tabs">
+              <button class="tab-btn active" data-mode="solid">단색</button>
+              <button class="tab-btn" data-mode="gradient">그라디언트</button>
+            </div>
+
+            <div id="solid-color-controls" class="color-picker-container">
+              <div class="color-picker-item">
+                <span class="color-label">QR 색상</span>
+                <div class="picker-wrapper">
+                  <input type="color" id="qr-color" value="#8B5CF6">
+                  <input type="text" id="qr-color-text" class="color-hex-input" value="#8B5CF6">
+                </div>
+              </div>
+              <div class="color-picker-item">
+                <span class="color-label">배경 색상</span>
+                <div class="picker-wrapper">
+                  <input type="color" id="bg-color" value="#FFFFFF">
+                  <input type="text" id="bg-color-text" class="color-hex-input" value="#FFFFFF">
+                </div>
+              </div>
+            </div>
+
+            <div id="gradient-color-controls" class="color-picker-container hidden">
+              <div class="color-picker-item">
+                <span class="color-label">시작 색상</span>
+                <div class="picker-wrapper">
+                  <input type="color" id="grad-start" value="#8B5CF6">
+                  <input type="text" id="grad-start-text" class="color-hex-input" value="#8B5CF6">
+                </div>
+              </div>
+              <div class="color-picker-item">
+                <span class="color-label">종료 색상</span>
+                <div class="picker-wrapper">
+                  <input type="color" id="grad-end" value="#EC4899">
+                  <input type="text" id="grad-end-text" class="color-hex-input" value="#EC4899">
+                </div>
+              </div>
+              <div class="color-picker-item full-width">
+                <span class="color-label">그라디언트 방향</span>
+                <select id="grad-direction" class="form-select">
+                  <option value="linear-lr">가로 (왼쪽 → 오른쪽)</option>
+                  <option value="linear-tb">세로 (위 → 아래)</option>
+                  <option value="linear-diag">대각선 (왼쪽 위 → 오른쪽 아래)</option>
+                  <option value="radial">방사형 (중앙 → 바깥쪽)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Presets -->
+        <div class="control-group presets-container">
+          <label class="control-label">프리미엄 컬러 프리셋</label>
+          <div class="presets-grid">
+            <button class="preset-btn" data-type="solid" data-qr="#000000" data-bg="#FFFFFF" style="background: linear-gradient(135deg, #000 50%, #fff 50%); border: 1px solid var(--border-color);"></button>
+            <button class="preset-btn" data-type="gradient" data-start="#8B5CF6" data-end="#EC4899" data-dir="linear-diag" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);"></button>
+            <button class="preset-btn" data-type="gradient" data-start="#3B82F6" data-end="#10B981" data-dir="linear-lr" style="background: linear-gradient(135deg, #3B82F6, #10B981);"></button>
+            <button class="preset-btn" data-type="gradient" data-start="#F59E0B" data-end="#EF4444" data-dir="linear-diag" style="background: linear-gradient(135deg, #F59E0B, #EF4444);"></button>
+            <button class="preset-btn" data-type="gradient" data-start="#00F2FE" data-end="#4FACFE" data-dir="linear-tb" style="background: linear-gradient(135deg, #00F2FE, #4FACFE);"></button>
+            <button class="preset-btn" data-type="gradient" data-start="#FF0844" data-end="#FFB199" data-dir="linear-diag" style="background: linear-gradient(135deg, #FF0844, #FFB199);"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preview Panel -->
+      <section class="panel glass-card preview-panel">
+        <h2 class="panel-title">라이브 미리보기</h2>
+        
+        <div class="preview-container-wrapper">
+          <div id="qrcode-preview-card" class="qrcode-preview-card">
+            <!-- QR SVG will be injected here -->
+            <div id="qrcode-svg-container" class="qrcode-svg-container"></div>
+          </div>
+        </div>
+
+        <div class="qr-info-badges">
+          <div class="info-badge">
+            <span class="badge-label">QR 크기</span>
+            <span id="info-size" class="badge-value">21x21</span>
+          </div>
+          <div class="info-badge">
+            <span class="badge-label">버전</span>
+            <span id="info-version" class="badge-value">1</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="download-svg-btn" class="btn btn-primary btn-glow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            SVG 다운로드
+          </button>
+          <button id="download-png-btn" class="btn btn-secondary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            PNG 다운로드
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <footer class="app-footer">
+      <p>Powered by <a href="https://github.com/nayuki/QR-Code-generator" target="_blank" rel="noopener noreferrer">Project Nayuki QR Code Generator</a></p>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
