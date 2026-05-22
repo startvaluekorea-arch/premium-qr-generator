@@ -7,7 +7,7 @@ const QRC = qrcodegen.QrCode
 
 export default function QRGenerator() {
   // States
-  const [text, setText] = React.useState("https://github.com/nayuki/QR-Code-generator")
+  const [text, setText] = React.useState("https://www.misawell.org")
   const [moduleStyle, setModuleStyle] = React.useState<"square" | "circle" | "rounded">("square")
   const [eccLevel, setEccLevel] = React.useState<"LOW" | "MEDIUM" | "QUARTILE" | "HIGH">("MEDIUM")
   const [borderSize, setBorderSize] = React.useState(4)
