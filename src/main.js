@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const eccLevelSelect = document.getElementById('ecc-level');
   const borderSizeInput = document.getElementById('border-size');
   const borderValueSpan = document.getElementById('border-value');
+  const borderStyleSelect = document.getElementById('border-style');
   
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   
@@ -141,6 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
     generateQRCode();
   });
   
+  borderStyleSelect.addEventListener('change', generateQRCode);
+  
   gradDirectionSelect.addEventListener('change', generateQRCode);
 
   // Generate path data based on selected module style
@@ -185,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = qrTextInput.value || ' ';
     const border = parseInt(borderSizeInput.value, 10);
     const style = moduleStyleSelect.value;
+    const borderStyle = borderStyleSelect.value;
     
     // ECC Level mapping
     let ecc;
@@ -248,10 +252,18 @@ document.addEventListener('DOMContentLoaded', () => {
         fillAttr = qrColorInput.value;
       }
 
-      currentSvgString = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${size} ${size}" stroke="none" width="100%" height="100%">
+      let extraBorderRect = '';
+      if (borderStyle === 'rounded') {
+        const strokeColor = colorMode === 'gradient' ? 'url(#qr-grad)' : qrColorInput.value;
+        const rxVal = border > 0 ? Math.min(2, border * 0.5) : 1;
+        extraBorderRect = `<rect x="0.5" y="0.5" width="${size - 1}" height="${size - 1}" rx="${rxVal}" fill="none" stroke="${strokeColor}" stroke-width="0.25"/>`;
+      }
+
+      currentSvgString = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${size} ${size}" stroke="none" width="450" height="450">
         ${defs}
         <rect width="100%" height="100%" fill="${bgFill}"/>
         <path d="${pathData}" fill="${fillAttr}"/>
+        ${extraBorderRect}
       </svg>`;
 
       svgContainer.innerHTML = currentSvgString;

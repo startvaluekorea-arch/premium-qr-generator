@@ -166,7 +166,7 @@ body.light-theme .glow-orb {
 
 .logo-text {
   font-family: var(--font-heading);
-  font-size: 1.75rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -559,8 +559,10 @@ body.light-theme .sun-icon {
 }
 
 .qrcode-preview-card {
-  width: 280px;
-  height: 280px;
+  width: 450px;
+  height: 450px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
   background: #FFFFFF;
   border-radius: 20px;
   display: flex;

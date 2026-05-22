@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium QR Code Generator</title>
+  <title>사단법인 아름다운사람들 전용 QR Studio</title>
   <meta name="description" content="Nayuki QR Code Generator를 탑재한 프리미엄 SVG QR 코드 생성기입니다. 실시간 스타일링, 다양한 커스텀 도형, 그리고 간편한 SVG/PNG 다운로드를 지원합니다.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +35,7 @@
             </linearGradient>
           </defs>
         </svg>
-        <span class="logo-text">QR <span class="gradient-text">Studio</span></span>
+        <span class="logo-text">사단법인 아름다운사람들 전용 <span class="gradient-text">QR Studio</span></span>
       </div>
       <div class="theme-switch-wrapper">
         <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="테마 전환">
@@ -91,6 +91,15 @@
             </div>
           </div>
 
+          <!-- Border Style -->
+          <div class="control-group">
+            <label for="border-style" class="control-label">외곽 테두리 스타일</label>
+            <select id="border-style" class="form-select">
+              <option value="none" selected>없음</option>
+              <option value="rounded">라운드</option>
+            </select>
+          </div>
+
           <!-- Color Customization -->
           <div class="control-group color-group">
             <label class="control-label">색상 모드</label>
@@ -103,8 +112,8 @@
               <div class="color-picker-item">
                 <span class="color-label">QR 색상</span>
                 <div class="picker-wrapper">
-                  <input type="color" id="qr-color" value="#8B5CF6">
-                  <input type="text" id="qr-color-text" class="color-hex-input" value="#8B5CF6">
+                  <input type="color" id="qr-color" value="#000000">
+                  <input type="text" id="qr-color-text" class="color-hex-input" value="#000000">
                 </div>
               </div>
               <div class="color-picker-item">
