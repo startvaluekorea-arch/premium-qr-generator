@@ -48,9 +48,9 @@ export default function Home() {
         subtitle="원하는 텍스트나 링크를 입력하고 프리미엄 템플릿, 모듈형 스타일링, 그리고 외곽 테두리 디자인을 더해 나만의 고유한 벡터 QR 코드를 생성해 보세요."
         gradient={true}
         blur={true}
-        titleClassName="text-4xl md:text-5xl font-black bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent leading-tight"
+        titleClassName="text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent leading-tight"
         subtitleClassName="text-sm md:text-base text-neutral-400 max-w-[650px] mt-4"
-        className="w-full border-0 relative z-10"
+        className="w-full border-0 relative z-10 min-h-[30vh] py-4"
       />
 
       {/* Core Interactive QR Generator Component */}
